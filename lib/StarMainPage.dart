@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:starbucks_app/ScreenController.dart';
 
 class StarMainPage extends StatefulWidget {
   const StarMainPage({super.key});
@@ -9,7 +11,6 @@ class StarMainPage extends StatefulWidget {
 }
 
 class _StarMainPageState extends State<StarMainPage> {
-
   bool isScrolled = true;
 
   @override
@@ -63,62 +64,137 @@ class _StarMainPageState extends State<StarMainPage> {
                   width: double.infinity,
                   height: 40,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
-                        Icons.mail_outline,
-                        color: Colors.black,
-                        size: 30,
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.mail_outline,
+                            color: Colors.black,
+                            size: 35,
+                          ),
+                          Text(
+                            '''What's' new''',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
                       ),
-                      Text(
-                        '''What's' new''',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Icon(
-                        Icons.airplane_ticket_outlined,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      Text(
-                        '''Coupon''',
-                        style: TextStyle(fontSize: 15),
-                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.airplane_ticket_outlined,
+                            color: Colors.black,
+                            size: 35,
+                          ),
+                          Text(
+                            '''Coupon''',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
               ),
             ),
             SliverList(
-                delegate: SliverChildListDelegate([
-                  Image.asset('assets/img/01_01_2023_winter_e-frequency.png'),
-                  Container(
-                    child: Image.asset('assets/img/03_01_chrismas_event.png'),
-                    color: Colors.black12,
-                  ),
-                  Container(
-                    constraints: BoxConstraints.tightFor(width: 200, height: 420),
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Container(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'assets/img/04_01_cardnews.png',
-                              ),
-                            ],
-                          ),
-                        ),
-                        Image.asset('assets/img/04_02_cardnews.png'),
-                        Image.asset('assets/img/04_03_cardnews.png'),
-                      ],
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/01_01_2023_winter_e-frequency.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Image.asset('assets/img/04_04_cardnews.png'),
-                ]))
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/03_01_chrismas_event.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/04_05_cardnews.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      constraints:
+                          BoxConstraints.tightFor(width: 200, height: 400),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        //horizontal 가로 x축 / vertical 세로 y축
+                        children: [
+                          Image.asset(
+                            'assets/img/04_01_cardnews.png',
+                          ),
+                          Image.asset(
+                            'assets/img/04_02_cardnews.png',
+                          ),
+                          Image.asset(
+                            'assets/img/04_03_cardnews.png',
+                          ),
+                          Image.asset(
+                            'assets/img/04_04_cardnews.png',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/04_06_cardnews.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/04_07_cardnews.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/04_08_cardnews.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/04_09_cardnews.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/img/04_10_cardnews.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-
+      bottomNavigationBar: ScreenController(), //다트 생성자 같은거
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.green[800],
 // shape: CircleBorder(),
@@ -153,12 +229,53 @@ class MySliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 210.0;
+  double get maxExtent => 210.0; //이미지 에셋에 담긴 크기 조절
   @override
-  double get minExtent => 210.0;
+  double get minExtent => 210.0; //이미지 에셋에 담긴 크기 조절 이 숫자를 줄이면 스크롤할때 크기가 반응해서 줄어듬
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return true;
   }
 }
+
+/*class _HomePageState extends State<HomePage> {
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
+
+  List imageList = [
+    'assets/img/04_01_cardnews.png',
+    'assets/img/04_02_cardnews.png',
+    'assets/img/04_03_cardnews.png',
+  ];
+
+  Widget sliderWidget(){
+    return CarouselSlider(items: imageList.map((imgLink) {
+      return Builder(
+          builder: (context){
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Image(
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                  imgLink,
+                ),
+              ),
+            );
+          },
+      );
+    },
+    ).toList(),
+        options: CarouselOptions(
+          height: 300,
+          viewportFraction: 1.0,
+          autoPlay: true,
+          autoPlayInterval: const Duration(seconds: 4),
+          onPageChanged: (index, reason){
+            setState(() {
+              _current = index;
+            });
+          },
+         ),
+    );
+  }*/
